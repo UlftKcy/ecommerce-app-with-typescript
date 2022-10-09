@@ -10,6 +10,21 @@ export interface Products {
 
 export interface InitialState {
     products: Products[]
-    loading:boolean
-    error:null
+    loading: boolean
+    error: null
+}
+
+
+export interface Categories {
+    categories: string[];
+}
+
+export interface InputName {
+    name: string
+    price: number
+    category: string
+    description: string
+    avatar: string
+    developerEmail: string
+
 }
