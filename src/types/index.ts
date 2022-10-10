@@ -10,6 +10,7 @@ export interface Products {
 
 export interface InitialState {
     products: Products[]
+    selected_product : object
     loading: boolean
     error: null
 }
@@ -20,6 +21,7 @@ export interface Categories {
 }
 
 export interface InputName {
+    _id?:string
     name: string
     price: number
     category: string

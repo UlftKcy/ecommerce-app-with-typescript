@@ -1,7 +1,13 @@
 import { FC } from 'react'
+import { fetchProductItem } from '../features/products/productSlice'
 import { InputName } from '../types'
+import { useAppDispatch } from '../utils/hooks'
 
-const Product: FC<InputName> = ({ name, price, avatar }) => {
+const Product: FC<InputName> = ({ _id,name, price, avatar }) => {
+    const dispatch = useAppDispatch();
+    const showDetailPage = (event: React.MouseEvent<HTMLButtonElement>): void=>{
+        dispatch(fetchProductItem(_id ?? ""))
+    };
     return (
         <div className='relative group col-span-1 h-64 place-content-center ring-offset-2 ring-1 ring-gray-300 bg-gray-100 font-mono rounded-lg drop-shadow-xl'>
            <div className='h-full group-hover:opacity-50'>
@@ -12,7 +18,7 @@ const Product: FC<InputName> = ({ name, price, avatar }) => {
             </div>
            </div>
             <div className='absolute z-10 inset-y-1/2 w-full h-0 flex justify-center items-center group-hover:opacity-100 opacity-0'>
-                <button className='bg-blue-300 text-blue-600 ring ring-blue-400 font-bold py-1 px-6 rounded-md'>Show Detail</button>
+                <button onClick={showDetailPage} className='bg-blue-300 text-blue-600 ring ring-blue-400 font-bold py-1 px-6 rounded-md'>Show Detail</button>
             </div>
         </div>
     )

@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchProducts } from '../features/products/productSlice';
 import { RootState } from '../features/store';
-import { InputName } from '../types';
 import { useAppDispatch } from '../utils/hooks';
 import Product from './Product';
 
 const Products = () => {
   const products =  useSelector((state:RootState)=>state.products.products);
   const dispatch = useAppDispatch();
-
+  
   useEffect(()=>{
     dispatch(fetchProducts());
   },[]);

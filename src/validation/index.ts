@@ -12,6 +12,7 @@ export const productSchema: Yup.SchemaOf<InputName> = Yup.object().shape({
         required(),
     avatar: Yup.string().
         required(),
-        developerEmail: Yup.string().
+    developerEmail: Yup.string().
         required(),
+    _id:Yup.string()
 });

@@ -58,7 +58,7 @@ const CreateProduct: React.FC = () => {
                     </div>
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="avatar" className='text-sm text-zinc-500 col-span-1 text-left'>Avatar :</label>
-                        <input type="file" id="avatar" name="avatar" onChange={formik.handleChange} value={formik.values.avatar} className='col-span-2 p-1 rounded border outline-0' />
+                        <input type="text" id="avatar" name="avatar" onChange={formik.handleChange} value={formik.values.avatar} className='col-span-2 p-1 rounded border outline-0' />
                         {formik.errors.avatar && <span>{formik.errors.avatar}</span>}
                     </div>
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>

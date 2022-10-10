@@ -12,7 +12,6 @@ export const getProducts = async () => {
         }
         )
         return response.data;
-
     } catch (error) {
         throw new Error('Something went wrong!', { cause: error });
     }
@@ -28,7 +27,20 @@ export const createNewProduct = async (product: InputName) => {
         }
         )
         return response.data;
+    } catch (error) {
+        throw new Error('Something went wrong!', { cause: error });
+    }
+};
 
+export const getProductItem = async (id: string) => {
+    try {
+        const response = await axios.get(baseURL + `${id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${bearer_token}`
+            }
+        })
+        return response.data;
     } catch (error) {
         throw new Error('Something went wrong!', { cause: error });
     }
