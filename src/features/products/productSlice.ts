@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { InitialState, InputName } from "../../types";
-import { getProducts ,createProduct} from "../../api/productService";
+import { getProducts , createNewProduct} from "../../api/productService";
 
 const initialState:InitialState = {
     products:[],
@@ -10,11 +10,11 @@ const initialState:InitialState = {
 
 export const fetchProducts = createAsyncThunk("products/get",async()=>{
    const response = await getProducts();
-   return response.data
+   return response.products;
 });
 
-export const createProducts = createAsyncThunk("products/create",async(product:InputName)=>{
-    const response = await createProduct(product);
+export const createProduct = createAsyncThunk("products/create",async(product:InputName)=>{
+    const response = await createNewProduct(product);
     return response.data;
 });
 
@@ -28,7 +28,7 @@ const productSlice = createSlice({
             state.loading = false;
             state.products = action.payload;
         });
-        builder.addCase(createProducts.fulfilled, (state:InitialState, action) => {
+        builder.addCase(createProduct.fulfilled, (state:InitialState, action) => {
             state.loading = false;
             state.products.unshift(action.payload);
         });

@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { useFormik } from 'formik';
 import { productSchema } from '../validation';
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
-import { createProducts } from '../features/products/productSlice';
+import { createProduct } from '../features/products/productSlice';
 import { getCategory } from '../features/categories/categorySlice';
 
 const CreateProduct: React.FC = () => {
@@ -20,10 +20,10 @@ const CreateProduct: React.FC = () => {
             category: "",
             description: "",
             avatar: "",
-            developerEmail: ""
+            developerEmail: "ukacay87@gmail.com"
         },
         onSubmit: values => {
-           dispatch(createProducts(values));
+           dispatch(createProduct(values));
         },
         validationSchema: productSchema
     })
