@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { fetchProducts } from '../features/products/productSlice';
-import { RootState } from '../features/store';
-import { useAppDispatch } from '../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import Product from './Product';
 
 const Products = () => {
-  const products =  useSelector((state:RootState)=>state.products.products);
+  const products =  useAppSelector((state)=>state.products.products);
   const dispatch = useAppDispatch();
   
   useEffect(()=>{
@@ -14,7 +12,7 @@ const Products = () => {
   },[]);
 
   return (
-    <div className='container m-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-10'>
+    <div className='container m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 p-10'>
     {
       React.Children.toArray(products.map((product:any)=>(
         <Product {...product}/>

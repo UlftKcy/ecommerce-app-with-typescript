@@ -1,50 +1,54 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { InitialState, InputName } from "../../types";
-import { getProducts , createNewProduct, getProductItem} from "../../api/productService";
+import { getProducts, createNewProduct, getProductItem } from "../../api/productService";
 
-const initialState:InitialState = {
-    products:[],
-    selected_product : {},
-    loading:false,
-    error:null
+const initialState: InitialState = {
+    products: [],
+    selected_product: {},
+    loading: false,
+    error: null
 }
 
-export const fetchProducts = createAsyncThunk("products/get",async()=>{
-   const response = await getProducts();
-   return response.products;
+export const fetchProducts = createAsyncThunk("products/get", async () => {
+    const response = await getProducts();
+    return response.products;
 });
 
-export const createProduct = createAsyncThunk("products/create",async(product:InputName)=>{
+export const createProduct = createAsyncThunk("products/create", async (product: InputName) => {
     const response = await createNewProduct(product);
     return response.data;
 });
 
-export const fetchProductItem = createAsyncThunk("products/get",async(id:string)=>{
+export const fetchProductItem = createAsyncThunk("products/getItem", async (id: string) => {
     const response = await getProductItem(id);
     return response.product;
-}) ;
+});
 
 
 const productSlice = createSlice({
-    name:"products",
+    name: "products",
     initialState,
-    reducers:{},
-    extraReducers:(builder)=>{
-        builder.addCase(fetchProducts.fulfilled,(state:InitialState,action)=>{
+    reducers: {
+        resetSelectedProduct: () => {
+            return initialState;
+        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchProducts.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.products = action.payload;
         });
-        builder.addCase(createProduct.fulfilled, (state:InitialState, action) => {
+        builder.addCase(createProduct.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.products.unshift(action.payload);
         });
 
-        builder.addCase(fetchProductItem.fulfilled, (state:InitialState, action) => {
+        builder.addCase(fetchProductItem.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.selected_product = action.payload;
         });
 
     }
 });
-
+export const { resetSelectedProduct } = productSlice.actions;
 export default productSlice.reducer;
