@@ -3,14 +3,16 @@ import { useFormik } from 'formik';
 import { productSchema } from '../validation';
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import { createProduct } from '../features/products/productSlice';
-import { getCategory } from '../features/categories/categorySlice';
+import { fetchCategories } from '../features/categories/categorySlice';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProduct: React.FC = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const categories = useAppSelector((state)=>state.categories.categories);
    
     useEffect(()=>{
-        dispatch(getCategory())
+        dispatch(fetchCategories())
     },[categories]);
 
     const formik = useFormik({
@@ -24,6 +26,7 @@ const CreateProduct: React.FC = () => {
         },
         onSubmit: values => {
            dispatch(createProduct(values));
+           navigate("/");
         },
         validationSchema: productSchema
     })
@@ -35,13 +38,13 @@ const CreateProduct: React.FC = () => {
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="name" className='text-sm text-zinc-500 col-span-1 text-left'>Name :</label>
                         <input type="text" id="name" name="name" onChange={formik.handleChange} value={formik.values.name} className='col-span-2 p-1 rounded border outline-0' />
-                        {formik.errors.name && <span>{formik.errors.name}</span>}
                     </div>
+                    {formik.errors.name && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.name}</div>}
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="price" className='text-sm text-zinc-500 col-span-1 text-left'>Price :</label>
                         <input type="number" id="price" name="price" onChange={formik.handleChange} value={formik.values.price} className='col-span-2 p-1 rounded border outline-0' />
-                        {formik.errors.price && <span>{formik.errors.price}</span>}
                     </div>
+                    {formik.errors.price && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.price}</div>}
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="category" className='text-sm text-zinc-500 col-span-1 text-left'>Category :</label>
                         <select id="category" name="category" onChange={formik.handleChange} value={formik.values.category} className='col-span-2 p-1 rounded border outline-0'>
@@ -49,23 +52,23 @@ const CreateProduct: React.FC = () => {
                                 <option>{category.name}</option>
                             )))}
                         </select>
-                        {formik.errors.category && <span>{formik.errors.category}</span>}
                     </div>
+                    {formik.errors.category && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.category}</div>}
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="description" className='text-sm text-zinc-500 col-span-1 text-left'>Description :</label>
                         <input type="text" id="description" name="description" onChange={formik.handleChange} value={formik.values.description} className='col-span-2 p-1 rounded border outline-0' />
-                        {formik.errors.description && <span>{formik.errors.description}</span>}
                     </div>
+                    {formik.errors.description && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.description}</div>}
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="avatar" className='text-sm text-zinc-500 col-span-1 text-left'>Avatar :</label>
                         <input type="text" id="avatar" name="avatar" onChange={formik.handleChange} value={formik.values.avatar} className='col-span-2 p-1 rounded border outline-0' />
-                        {formik.errors.avatar && <span>{formik.errors.avatar}</span>}
                     </div>
+                    {formik.errors.avatar && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.avatar}</div>}
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="developerEmail" className='text-sm text-zinc-500 col-span-1 text-left'>Developer Email :</label>
                         <input type="text" id="developerEmail" name="developerEmail" onChange={formik.handleChange} value={formik.values.developerEmail} className='col-span-2 p-1 rounded border outline-0' />
-                        {formik.errors.developerEmail && <span>{formik.errors.developerEmail}</span>}
                     </div>
+                    {formik.errors.developerEmail && <div className='text-sm text-red-500 text-center mb-5'>{formik.errors.developerEmail}</div>}
                     <button type='submit' className='w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-700'>Add Product</button>
                 </form>
             </div>

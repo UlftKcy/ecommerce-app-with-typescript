@@ -5,12 +5,14 @@ export interface Products {
     Description: string
     Avatar: string
     DeveloperEmail: string
+    _id?:string
 
 }
 
 export interface InitialState {
     products: Products[]
     selected_product : object
+    favorite_products: InputName[]
     loading: boolean
     error: null
 }
@@ -18,6 +20,7 @@ export interface InitialState {
 
 export interface Categories {
     categories: string[];
+    selected_category : string
 }
 
 export interface InputName {
@@ -28,5 +31,4 @@ export interface InputName {
     description: string
     avatar: string
     developerEmail: string
-
 }

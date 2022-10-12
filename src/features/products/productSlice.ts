@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { InitialState, InputName } from "../../types";
 import { getProducts, createNewProduct, getProductItem } from "../../api/productService";
 
 const initialState: InitialState = {
     products: [],
     selected_product: {},
+    favorite_products : [],
     loading: false,
     error: null
 }
@@ -31,6 +32,18 @@ const productSlice = createSlice({
     reducers: {
         resetSelectedProduct: () => {
             return initialState;
+        },
+
+        deleteProduct(state,{payload}){
+            const currentStateProducts = current(state).products;
+            state.products = currentStateProducts.filter(product=>product._id !== payload._id)
+        },
+        addToFavorites(state,{payload}){
+            state.favorite_products.push(payload)
+        },
+        removeFavorites(state,{payload}){
+            const currentStateFavorites = current(state).favorite_products;
+            state.favorite_products = currentStateFavorites.filter(favorite_product=>favorite_product._id !== payload._id)
         }
     },
     extraReducers: (builder) => {
@@ -50,5 +63,5 @@ const productSlice = createSlice({
 
     }
 });
-export const { resetSelectedProduct } = productSlice.actions;
+export const { resetSelectedProduct,deleteProduct,addToFavorites,removeFavorites } = productSlice.actions;
 export default productSlice.reducer;
