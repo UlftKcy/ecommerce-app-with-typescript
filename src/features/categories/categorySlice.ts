@@ -5,7 +5,9 @@ import { Categories } from "../../types";
 
 const initialState:Categories = {
     categories:[],
-    selected_category : ""
+    selected_category : "",
+    loading: false,
+    error: null
 }
 
 export const fetchCategories = createAsyncThunk("categories/get",async()=>{
@@ -27,11 +29,32 @@ const categorySlice = createSlice({
         }
     },
     extraReducers : (builder)=>{
+        // fetch categories
+        builder.addCase(fetchCategories.pending,(state,action)=>{
+            state.loading = true;
+            state.error = null;
+        });
         builder.addCase(fetchCategories.fulfilled,(state,action)=>{
+            state.loading = false;
             state.categories = action.payload;
         });
+        builder.addCase(fetchCategories.rejected,(state,action)=>{
+            state.loading = false;
+            state.error =  "Error fetching categories";
+        });
+
+        // fetch category
+        builder.addCase(fetchCategory.pending,(state,action)=>{
+            state.loading = true;
+            state.error = null;
+        });
         builder.addCase(fetchCategory.fulfilled,(state,action)=>{
+            state.loading = false;
             state.selected_category = action.payload;
+        });
+        builder.addCase(fetchCategory.rejected,(state,action)=>{
+            state.loading = false;
+            state.error =  "Error fetching category";
         });
     }
 });

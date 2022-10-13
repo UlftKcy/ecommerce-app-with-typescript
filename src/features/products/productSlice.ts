@@ -47,18 +47,47 @@ const productSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+
+        // fetch products
+        builder.addCase(fetchProducts.pending, (state: InitialState, action) => {
+            state.loading = true;
+            state.error = null;
+        });
         builder.addCase(fetchProducts.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.products = action.payload;
+        });
+        builder.addCase(fetchProducts.rejected, (state: InitialState, action) => {
+            state.loading = false;
+            state.error =  "Error fetching products";
+        });
+
+        // create product
+        builder.addCase(createProduct.pending, (state: InitialState, action) => {
+            state.loading = true;
+            state.error = null;
         });
         builder.addCase(createProduct.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.products.unshift(action.payload);
         });
+        builder.addCase(createProduct.rejected, (state: InitialState, action) => {
+            state.loading = false;
+            state.error =  "Error creating product";
+        });
 
+         // fetch product
+        builder.addCase(fetchProductItem.pending, (state: InitialState, action) => {
+            state.loading = true;
+            state.error = null;
+        });
         builder.addCase(fetchProductItem.fulfilled, (state: InitialState, action) => {
             state.loading = false;
             state.selected_product = action.payload;
+        });
+        builder.addCase(fetchProductItem.rejected, (state: InitialState, action) => {
+            state.loading = false;
+            state.error = "Error fetching product";
         });
 
     }

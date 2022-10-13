@@ -14,13 +14,15 @@ export interface InitialState {
     selected_product : object
     favorite_products: InputName[]
     loading: boolean
-    error: null
+    error: null | string
 }
 
 
 export interface Categories {
     categories: string[];
     selected_category : string
+    loading: boolean
+    error: null | string
 }
 
 export interface InputName {
