@@ -1,10 +1,10 @@
 import axios from "axios";
 import { InputName } from "../types";
-import { baseURL, bearer_token } from "./service";
+import { bearer_token, productsBaseURL } from "./service";
 
 export const getProducts = async () => {
     try {
-        const response = await axios.get(baseURL, {
+        const response = await axios.get(productsBaseURL, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${bearer_token}`
@@ -19,7 +19,7 @@ export const getProducts = async () => {
 
 export const createNewProduct = async (product: InputName) => {
     try {
-        const response = await axios.post(baseURL, product, {
+        const response = await axios.post(productsBaseURL, product, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${bearer_token}`
@@ -34,7 +34,7 @@ export const createNewProduct = async (product: InputName) => {
 
 export const getProductItem = async (id: string) => {
     try {
-        const response = await axios.get(baseURL + `${id}`, {
+        const response = await axios.get(productsBaseURL + `${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${bearer_token}`

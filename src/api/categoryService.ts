@@ -1,11 +1,10 @@
 import axios from "axios";
-import { baseURL, bearer_token } from "./service";
+import { bearer_token, categoriesBaseURL } from "./service";
 
 export const getCategories = async () => {
     try {
-        const response = await axios.get(baseURL, {
+        const response = await axios.get(categoriesBaseURL, {
             headers: {
-                
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${bearer_token}`
             }
@@ -19,7 +18,7 @@ export const getCategories = async () => {
 
 export const getCategory = async (id: string) => {
     try {
-        const response = await axios.get(baseURL + `${id}`, {
+        const response = await axios.get(categoriesBaseURL + `${id}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${bearer_token}`
