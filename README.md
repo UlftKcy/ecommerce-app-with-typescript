@@ -1,4 +1,4 @@
-<h1 align="center">UPayments React JS Case Study</h1>
+<h1 align="center">Ecommerce App</h1>
 
 
 <div align="center">
