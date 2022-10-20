@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { InitialState, InputName } from "../../types";
 import { getProducts, createNewProduct, getProductItem } from "../../api/productService";
 

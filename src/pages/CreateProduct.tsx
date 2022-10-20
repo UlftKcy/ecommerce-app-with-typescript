@@ -31,7 +31,7 @@ const CreateProduct: React.FC = () => {
         validationSchema: productSchema
     })
     return (
-        <div className='container mx-auto w-1/2 my-10 h-screen'>
+        <div className='container mx-auto md:w-1/2 w-screen h-screen my-10 px-5'>
             <div className='bg-gray-300 py-2 rounded-tl-md rounded-tr-md font-bold'>Create Product</div>
             <div className='border p-5'>
                 <form onSubmit={formik.handleSubmit}>
@@ -48,7 +48,7 @@ const CreateProduct: React.FC = () => {
                     <div className='grid grid-cols-3 grid-rows-1 items-center mb-5'>
                         <label htmlFor="category" className='text-sm text-zinc-500 col-span-1 text-left'>Category :</label>
                         <select id="category" name="category" onChange={formik.handleChange} value={formik.values.category} className='col-span-2 p-1 rounded border outline-0'>
-                            {React.Children.toArray(categories.map((category:any)=>(
+                            {React.Children.toArray(categories?.map((category:any)=>(
                                 <option>{category.name}</option>
                             )))}
                         </select>
