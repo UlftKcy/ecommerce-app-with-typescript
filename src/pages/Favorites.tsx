@@ -5,6 +5,7 @@ import { useAppSelector } from '../utils/hooks';
 
 const Favorites: FC = () => {
     const favorite_products = useAppSelector(state => state.products.favorite_products);
+    console.log(favorite_products)
     return (
         <>
             {

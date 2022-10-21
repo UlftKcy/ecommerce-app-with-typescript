@@ -39,6 +39,7 @@ const productSlice = createSlice({
             state.products = currentStateProducts.filter(product=>product._id !== payload._id)
         },
         addToFavorites(state,{payload}){
+            console.log(payload);
             state.favorite_products.push(payload)
         },
         removeFavorites(state,{payload}){
