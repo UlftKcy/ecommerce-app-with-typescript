@@ -17,7 +17,8 @@ import { combineReducers } from "@reduxjs/toolkit";
 const persistConfig = {
     key: "root",
     version: 1,
-    storage
+    storage,
+    blacklist:["categories"] //  prevent categories from persisting
 }
 const reducer = combineReducers({
     products: productSlice,

@@ -30,8 +30,8 @@ const productSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        resetSelectedProduct: () => {
-            return initialState;
+        resetSelectedProduct: (state) => {
+            return {...state,selected_product: {}};
         },
 
         deleteProduct(state,{payload}){
